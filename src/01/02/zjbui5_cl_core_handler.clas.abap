@@ -1,14 +1,13 @@
-CLASS zjbui5_cl_core_http_post DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+CLASS zjbui5_cl_core_handler DEFINITION
+  PUBLIC FINAL
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
     DATA mo_action       TYPE REF TO zjbui5_cl_core_action.
     DATA mv_request_json TYPE string.
-    DATA ms_request      TYPE zjbui5_if_core_types=>ty_s_http_request_post.
-    DATA ms_response     TYPE zjbui5_if_core_types=>ty_s_http_response_post.
+    DATA ms_request      TYPE zjbui5_if_core_types=>ty_s_request.
+    DATA ms_response     TYPE zjbui5_if_core_types=>ty_s_response.
     DATA mv_response     TYPE string.
 
     METHODS constructor
@@ -33,9 +32,7 @@ CLASS zjbui5_cl_core_http_post DEFINITION
 ENDCLASS.
 
 
-
-CLASS zjbui5_cl_core_http_post IMPLEMENTATION.
-
+CLASS zjbui5_cl_core_handler IMPLEMENTATION.
 
   METHOD constructor.
 
@@ -43,7 +40,6 @@ CLASS zjbui5_cl_core_http_post IMPLEMENTATION.
     mo_action = NEW zjbui5_cl_core_action( me ).
 
   ENDMETHOD.
-
 
   METHOD main.
 
@@ -54,25 +50,23 @@ CLASS zjbui5_cl_core_http_post IMPLEMENTATION.
       ENDIF.
     ENDDO.
 
-    result = VALUE #(
-        body = mv_response
-        s_stateful = ms_response-s_front-params-s_stateful
+    result = VALUE #( body       = mv_response
+                      s_stateful = ms_response-s_front-params-s_stateful
     ).
 
   ENDMETHOD.
 
-
   METHOD main_begin.
     TRY.
 
-        DATA(lo_json_mapper) = NEW zjbui5_cl_core_json_srv( ).
+        DATA(lo_json_mapper) = NEW zjbui5_cl_core_srv_json( ).
         ms_request = lo_json_mapper->request_json_to_abap( mv_request_json ).
 
         IF ms_request-s_front-id IS NOT INITIAL.
           mo_action = mo_action->factory_by_frontend( ).
 
         ELSEIF ms_request-s_control-app_start IS NOT INITIAL.
-          NEW zjbui5_cl_core_draft_srv( )->cleanup( ).
+          NEW zjbui5_cl_core_srv_draft( )->cleanup( ).
           mo_action = mo_action->factory_first_start( ).
 
         ELSE.
@@ -84,29 +78,26 @@ CLASS zjbui5_cl_core_http_post IMPLEMENTATION.
     ENDTRY.
   ENDMETHOD.
 
-
   METHOD main_end.
 
-    ms_response = VALUE #(
-        s_front-params = mo_action->ms_next-s_set
-        s_front-id     = mo_action->mo_app->ms_draft-id
-        s_front-app    = zjbui5_cl_util=>rtti_get_classname_by_ref( mo_action->mo_app->mo_app )
+    ms_response = VALUE #( s_front-params = mo_action->ms_next-s_set
+                           s_front-id     = mo_action->mo_app->ms_draft-id
+                           s_front-app    = zjbui5_cl_util=>rtti_get_classname_by_ref( mo_action->mo_app->mo_app )
         ).
 
-    IF ms_response-s_front-params-s_view-check_update_model = abap_true
-    OR ms_response-s_front-params-s_view_nest-check_update_model = abap_true
-    OR ms_response-s_front-params-s_view_nest2-check_update_model = abap_true
-    OR ms_response-s_front-params-s_popup-check_update_model = abap_true
-    OR ms_response-s_front-params-s_popover-check_update_model = abap_true
-    OR ms_response-s_front-params-s_view-xml IS NOT INITIAL
-    OR ms_response-s_front-params-s_view_nest-xml IS NOT INITIAL
-    OR ms_response-s_front-params-s_view_nest2-xml IS NOT INITIAL
-    OR ms_response-s_front-params-s_popup-xml IS NOT INITIAL
-    OR ms_response-s_front-params-s_popover-xml IS NOT INITIAL.
+    IF    ms_response-s_front-params-s_view-check_update_model        = abap_true
+       OR ms_response-s_front-params-s_view_nest-check_update_model   = abap_true
+       OR ms_response-s_front-params-s_view_nest2-check_update_model  = abap_true
+       OR ms_response-s_front-params-s_popup-check_update_model       = abap_true
+       OR ms_response-s_front-params-s_popover-check_update_model     = abap_true
+       OR ms_response-s_front-params-s_view-xml IS NOT INITIAL
+       OR ms_response-s_front-params-s_view_nest-xml                 IS NOT INITIAL
+       OR ms_response-s_front-params-s_view_nest2-xml                IS NOT INITIAL
+       OR ms_response-s_front-params-s_popup-xml IS NOT INITIAL
+       OR ms_response-s_front-params-s_popover-xml                   IS NOT INITIAL.
 
-      DATA(lo_model) = NEW zjbui5_cl_core_attri_srv(
-       attri = mo_action->mo_app->mt_attri
-       app   = mo_action->mo_app->mo_app ).
+      DATA(lo_model) = NEW zjbui5_cl_core_srv_attri( attri = mo_action->mo_app->mt_attri
+                                                    app   = mo_action->mo_app->mo_app ).
       lo_model->attri_refs_update( ).
       ms_response-model = mo_action->mo_app->model_json_stringify( ).
 
@@ -114,7 +105,7 @@ CLASS zjbui5_cl_core_http_post IMPLEMENTATION.
       ms_response-model = `{}`.
     ENDIF.
 
-    DATA(lo_json_mapper) = NEW zjbui5_cl_core_json_srv( ).
+    DATA(lo_json_mapper) = NEW zjbui5_cl_core_srv_json( ).
     mv_response = lo_json_mapper->response_abap_to_json( ms_response ).
 
     CLEAR mo_action->ms_next.
@@ -124,7 +115,6 @@ CLASS zjbui5_cl_core_http_post IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
-
 
   METHOD main_process.
     TRY.

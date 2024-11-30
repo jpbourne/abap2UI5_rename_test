@@ -1,4 +1,4 @@
-CLASS zjbui5_cl_pop_messages DEFINITION
+CLASS zjbui5_cl_pop_bal DEFINITION
   PUBLIC FINAL
   CREATE PUBLIC.
 
@@ -13,6 +13,8 @@ CLASS zjbui5_cl_pop_messages DEFINITION
         title      TYPE string,
         subtitle   TYPE string,
         number     TYPE string,
+        time       TYPE string,
+        date       TYPE string,
         message    TYPE string,
         message_v1 TYPE string,
         message_v2 TYPE string,
@@ -27,9 +29,9 @@ CLASS zjbui5_cl_pop_messages DEFINITION
     CLASS-METHODS factory
       IMPORTING
         i_messages      TYPE any
-        i_title         TYPE string DEFAULT `abap2UI5 - Message Popup`
+        i_title         TYPE string DEFAULT `abap2UI5 - Business Application Log`
       RETURNING
-        VALUE(r_result) TYPE REF TO zjbui5_cl_pop_messages.
+        VALUE(r_result) TYPE REF TO zjbui5_cl_pop_bal.
 
   PROTECTED SECTION.
     DATA client            TYPE REF TO zjbui5_if_client.
@@ -42,12 +44,17 @@ CLASS zjbui5_cl_pop_messages DEFINITION
 ENDCLASS.
 
 
-CLASS zjbui5_cl_pop_messages IMPLEMENTATION.
+CLASS zjbui5_cl_pop_bal IMPLEMENTATION.
   METHOD factory.
 
     r_result = NEW #( ).
-    DATA(lt_msg) = zjbui5_cl_util=>msg_get( i_messages ).
 
+    "read log infos
+    "handle
+    "..
+
+    "read messages..
+    DATA(lt_msg) = zjbui5_cl_util=>msg_get( i_messages ).
     LOOP AT lt_msg REFERENCE INTO DATA(lr_row).
 
       DATA(ls_row) = VALUE ty_s_msg( ).
@@ -56,6 +63,8 @@ CLASS zjbui5_cl_pop_messages IMPLEMENTATION.
 *      lr_row->title = `title`.
 *      lr_row->message = `message`.
       ls_row-subtitle = |{ lr_row->id } { lr_row->no }|.
+      ls_row-date = zjbui5_cl_util=>time_get_date_by_stampl( lr_row->timestampl ).
+      ls_row-time = zjbui5_cl_util=>time_get_time_by_stampl( lr_row->timestampl ).
 *      lr_row->group = `001`.
 
       INSERT ls_row INTO TABLE r_result->mt_msg.
@@ -68,21 +77,29 @@ CLASS zjbui5_cl_pop_messages IMPLEMENTATION.
   METHOD view_display.
 
     DATA(popup) = zjbui5_cl_xml_view=>factory_popup( ).
-    popup = popup->dialog( title             = `Messages`
+    popup = popup->dialog( title             = `Business Application Log`
                            contentheight     = '50%'
                            contentwidth      = '50%'
                            verticalScrolling = abap_false
-                           afterclose        = client->_event( 'BUTTON_CONTINUE' )
-         ).
+                           afterclose        = client->_event( 'BUTTON_CONTINUE' ) ).
 
-    popup->message_view( items = client->_bind( mt_msg  )
-*                         groupitems = abap_true
-        )->message_item( type     = `{TYPE}`
-                         title    = `{TITLE}`
-                         subtitle = `{SUBTITLE}`
-*                         description = `{MESSAGE}`
-*                         groupname = `{GROUP}`
-            ).
+    DATA(table) = popup->table( client->_bind( mt_msg ) ).
+    table->columns(
+         )->column( )->text( 'Date' )->get_parent(
+         )->column( )->text( 'Time' )->get_parent(
+         )->column( )->text( 'Type' )->get_parent(
+         )->column( )->text( 'ID' )->get_parent(
+         )->column( )->text( 'No' )->get_parent(
+         )->column( )->text( 'Message' ).
+
+    table->items( )->column_list_item( )->cells(
+       )->text( '{DATE}'
+       )->text( '{TIME}'
+       )->text( '{TYPE}'
+       )->text( '{ID}'
+       )->text( '{NUMBER}'
+       )->text( '{MESSAGE}'
+        ).
 
     popup->buttons(
        )->button( text  = 'continue'

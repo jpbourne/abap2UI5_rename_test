@@ -1,15 +1,15 @@
 CLASS zjbui5_cl_util DEFINITION
   PUBLIC
-  CREATE PUBLIC
-  INHERITING FROM zjbui5_cl_abap_api.
+  INHERITING FROM zjbui5_cl_abap_api
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
-*  abap-toolkit - Utility Functions for ABAP Cloud & Standard ABAP
-*  version: '0.0.1'.
-*  origin: https://github.com/oblomov-dev/abap-toolkit
-*  author: https://github.com/oblomov-dev
-*  license: MIT.
+    " abap-toolkit - Utility Functions for ABAP Cloud & Standard ABAP
+    " version: '0.0.1'.
+    " origin: https://github.com/oblomov-dev/abap-toolkit
+    " author: https://github.com/oblomov-dev
+    " license: MIT.
 
     TYPES:
       BEGIN OF ty_s_name_value,
@@ -48,9 +48,10 @@ CLASS zjbui5_cl_util DEFINITION
     TYPES ty_t_filter_multi TYPE STANDARD TABLE OF ty_s_filter_multi WITH EMPTY KEY.
 
     TYPES:
-      BEGIN OF ty_S_sql,
+      BEGIN OF ty_s_sql,
         tabname        TYPE string,
         check_autoload TYPE abap_bool,
+        layout_name    TYPE string,
         layout_id      TYPE string,
         count          TYPE i,
         t_ref          TYPE REF TO data,
@@ -58,9 +59,35 @@ CLASS zjbui5_cl_util DEFINITION
         t_filter       TYPE ty_t_filter_multi,
       END OF ty_s_sql.
 
+    TYPES:
+      BEGIN OF ty_s_msg,
+        text       TYPE string,
+        id         TYPE string,
+        no         TYPE string,
+        type       TYPE string,
+        v1         TYPE string,
+        v2         TYPE string,
+        v3         TYPE string,
+        v4         TYPE string,
+        timestampl TYPE timestampl,
+      END OF ty_s_msg,
+      ty_t_msg TYPE STANDARD TABLE OF ty_S_msg WITH EMPTY KEY.
+
+    CLASS-METHODS ui5_get_msg_type
+      IMPORTING
+        val           TYPE clike
+      RETURNING
+        VALUE(result) TYPE string.
+
+    CLASS-METHODS msg_get
+      IMPORTING
+        val           TYPE any
+      RETURNING
+        VALUE(result) TYPE ty_t_msg.
+
     CLASS-METHODS rtti_get_t_attri_by_include
       IMPORTING
-        type          TYPE REF TO cl_abap_datadescr
+        !type         TYPE REF TO cl_abap_datadescr
       RETURNING
         VALUE(result) TYPE abap_component_tab.
 
@@ -128,9 +155,9 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS filter_itab
       IMPORTING
-        filter TYPE ty_t_filter_multi
+        !filter TYPE ty_t_filter_multi
       CHANGING
-        val    TYPE STANDARD TABLE.
+        val     TYPE STANDARD TABLE.
 
     CLASS-METHODS filter_get_multi_by_data
       IMPORTING
@@ -150,7 +177,6 @@ CLASS zjbui5_cl_util DEFINITION
       RETURNING
         VALUE(result) TYPE string.
 
-
     CLASS-METHODS filter_get_sql_by_sql_string
       IMPORTING
         val           TYPE clike
@@ -159,20 +185,20 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS url_param_get
       IMPORTING
-        !val          TYPE string
-        !url          TYPE string
+        val           TYPE string
+        url           TYPE string
       RETURNING
         VALUE(result) TYPE string.
 
     CLASS-METHODS url_param_create_url
       IMPORTING
-        !t_params     TYPE ty_t_name_value
+        t_params      TYPE ty_t_name_value
       RETURNING
         VALUE(result) TYPE string.
 
     CLASS-METHODS url_param_set
       IMPORTING
-        !url          TYPE string
+        url           TYPE string
         !name         TYPE string
         !value        TYPE string
       RETURNING
@@ -198,7 +224,7 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS x_check_raise
       IMPORTING
-        !v    TYPE clike DEFAULT `CX_SY_SUBRC`
+        v     TYPE clike DEFAULT `CX_SY_SUBRC`
         !when TYPE xfeld.
 
     CLASS-METHODS x_raise
@@ -212,19 +238,19 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS json_stringify
       IMPORTING
-        any           TYPE any
+        !any          TYPE any
       RETURNING
         VALUE(result) TYPE string.
 
     CLASS-METHODS xml_parse
       IMPORTING
-        xml TYPE clike
+        !xml TYPE clike
       EXPORTING
-        any TYPE any.
+        !any TYPE any.
 
     CLASS-METHODS xml_stringify
       IMPORTING
-        any           TYPE any
+        !any          TYPE any
       RETURNING
         VALUE(result) TYPE string
       RAISING
@@ -244,9 +270,9 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS json_parse
       IMPORTING
-        val  TYPE any
+        val   TYPE any
       CHANGING
-        data TYPE any.
+        !data TYPE any.
 
     CLASS-METHODS c_trim_upper
       IMPORTING
@@ -256,7 +282,7 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS xml_srtti_stringify
       IMPORTING
-        data          TYPE any
+        !data         TYPE any
       RETURNING
         VALUE(result) TYPE string.
 
@@ -272,8 +298,8 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS time_substract_seconds
       IMPORTING
-        time          TYPE timestampl
-        seconds       TYPE i
+        !time         TYPE timestampl
+        !seconds      TYPE i
       RETURNING
         VALUE(result) TYPE timestampl.
 
@@ -352,7 +378,7 @@ CLASS zjbui5_cl_util DEFINITION
     CLASS-METHODS filter_update_tokens
       IMPORTING
         val           TYPE ty_t_filter_multi
-        name          TYPE string
+        !name         TYPE string
       RETURNING
         VALUE(result) TYPE ty_t_filter_multi.
 
@@ -380,21 +406,21 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS itab_corresponding
       IMPORTING
-        val TYPE STANDARD TABLE
+        val  TYPE STANDARD TABLE
       CHANGING
-        tab TYPE STANDARD TABLE.
+        !tab TYPE STANDARD TABLE.
 
     CLASS-METHODS itab_filter_by_val
       IMPORTING
-        val TYPE clike
+        val  TYPE clike
       CHANGING
-        tab TYPE STANDARD TABLE.
+        !tab TYPE STANDARD TABLE.
 
     CLASS-METHODS itab_filter_by_t_range
       IMPORTING
-        val TYPE ty_t_filter_multi
+        val  TYPE ty_t_filter_multi
       CHANGING
-        tab TYPE STANDARD TABLE.
+        !tab TYPE STANDARD TABLE.
 
     CLASS-METHODS time_get_time_by_stampl
       IMPORTING
@@ -410,7 +436,7 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS conv_copy_ref_data
       IMPORTING
-        from          TYPE any
+        !from         TYPE any
       RETURNING
         VALUE(result) TYPE REF TO data.
 
@@ -420,22 +446,26 @@ CLASS zjbui5_cl_util DEFINITION
 
     CLASS-METHODS rtti_tab_get_relative_name
       IMPORTING
-        table         TYPE any
+        !table        TYPE any
       RETURNING
         VALUE(result) TYPE string.
 
     CLASS-METHODS check_raise_srtti_installed.
 
+    CLASS-METHODS rtti_check_clike
+      IMPORTING
+        val           TYPE any
+      RETURNING
+        VALUE(result) TYPE abap_bool.
+
   PROTECTED SECTION.
+
   PRIVATE SECTION.
 
 ENDCLASS.
 
 
-
 CLASS zjbui5_cl_util IMPLEMENTATION.
-
-
   METHOD boolean_abap_2_json.
 
     IF boolean_check_by_data( val ).
@@ -446,7 +476,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD boolean_check_by_data.
 
     TRY.
@@ -456,7 +485,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     ENDTRY.
 
   ENDMETHOD.
-
 
   METHOD boolean_check_by_name.
 
@@ -475,7 +503,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD check_bound_a_not_inital.
 
     IF val IS NOT BOUND.
@@ -485,7 +512,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     result = xsdbool( check_unassign_inital( val ) = abap_false ).
 
   ENDMETHOD.
-
 
   METHOD check_unassign_inital.
 
@@ -501,10 +527,9 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD conv_copy_ref_data.
 
-    FIELD-SYMBOLS <from> TYPE data.
+    FIELD-SYMBOLS <from>   TYPE data.
     FIELD-SYMBOLS <result> TYPE data.
 
     IF rtti_check_ref_data( from ).
@@ -519,13 +544,11 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD conv_get_as_data_ref.
 
     GET REFERENCE OF val INTO result.
 
   ENDMETHOD.
-
 
   METHOD c_trim.
 
@@ -538,20 +561,17 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD c_trim_lower.
 
     result = to_lower( c_trim( CONV string( val ) ) ).
 
   ENDMETHOD.
 
-
   METHOD c_trim_upper.
 
     result = to_upper( c_trim( CONV string( val ) ) ).
 
   ENDMETHOD.
-
 
   METHOD filter_itab.
 
@@ -576,7 +596,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD filter_get_multi_by_data.
 
     LOOP AT rtti_get_t_attri_by_any( val ) REFERENCE INTO DATA(lr_comp).
@@ -585,32 +604,43 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD filter_get_range_by_token.
 
     DATA(lv_length) = strlen( value ) - 1.
     CASE value(1).
 
       WHEN `=`.
-        result = VALUE #( sign = `I` option = `EQ` low = value+1 ).
+        result = VALUE #( sign   = `I`
+                          option = `EQ`
+                          low    = value+1 ).
       WHEN `<`.
         IF value+1(1) = `=`.
-          result = VALUE #( sign = `I` option = `LE` low = value+2 ).
+          result = VALUE #( sign   = `I`
+                            option = `LE`
+                            low    = value+2 ).
         ELSE.
-          result = VALUE #( sign = `I` option = `LT` low = value+1 ).
+          result = VALUE #( sign   = `I`
+                            option = `LT`
+                            low    = value+1 ).
         ENDIF.
       WHEN `>`.
         IF value+1(1) = `=`.
-          result = VALUE #( sign = `I` option = `GE` low = value+2 ).
+          result = VALUE #( sign   = `I`
+                            option = `GE`
+                            low    = value+2 ).
         ELSE.
-          result = VALUE #( sign = `I` option = `GT` low = value+1 ).
+          result = VALUE #( sign   = `I`
+                            option = `GT`
+                            low    = value+1 ).
         ENDIF.
 
       WHEN `*`.
         IF value+lv_length(1) = `*`.
           SHIFT value RIGHT DELETING TRAILING `*`.
           SHIFT value LEFT DELETING LEADING `*`.
-          result = VALUE #( sign = `I` option = `CP` low = value ).
+          result = VALUE #( sign   = `I`
+                            option = `CP`
+                            low    = value ).
         ENDIF.
 
       WHEN OTHERS.
@@ -618,13 +648,14 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
           SPLIT value AT `...` INTO result-low result-high.
           result-option = `BT`.
         ELSE.
-          result = VALUE #( sign = `I` option = `EQ` low = value ).
+          result = VALUE #( sign   = `I`
+                            option = `EQ`
+                            low    = value ).
         ENDIF.
 
     ENDCASE.
 
   ENDMETHOD.
-
 
   METHOD filter_update_tokens.
 
@@ -635,12 +666,16 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     ENDLOOP.
 
     LOOP AT lr_filter->t_token_added INTO ls_token.
-      INSERT VALUE #( key = ls_token-key text = ls_token-text visible = abap_true editable = abap_true ) INTO TABLE lr_filter->t_token.
+      INSERT VALUE #( key      = ls_token-key
+                      text     = ls_token-text
+                      visible  = abap_true
+                      editable = abap_true ) INTO TABLE lr_filter->t_token.
     ENDLOOP.
 
     CLEAR lr_filter->t_token_removed.
     CLEAR lr_filter->t_token_added.
 
+    " TODO: variable is assigned but never used (ABAP cleaner)
     DATA(lt_token) = result[ name = name ]-t_token.
     DATA(lt_range) = zjbui5_cl_util=>filter_get_range_t_by_token_t( result[ name = name ]-t_token ).
     lr_filter->t_range = lt_range.
@@ -655,23 +690,20 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD filter_get_token_range_mapping.
 
-    result = VALUE #(
-      (   n = `EQ`     v = `={LOW}` )
-      (   n = `LT`     v = `<{LOW}` )
-      (   n = `LE`     v = `<={LOW}` )
-      (   n = `GT`     v = `>{LOW}` )
-      (   n = `GE`     v = `>={LOW}` )
-      (   n = `CP`     v = `*{LOW}*` )
-      (   n = `BT`     v = `{LOW}...{HIGH}` )
-      (   n = `NE`     v = `!(={LOW})` )
-      (   n = `NE`     v = `!(<leer>)` )
-      (   n = `<leer>` v = `<leer>` ) ).
+    result = VALUE #( (   n = `EQ`     v = `={LOW}` )
+                      (   n = `LT`     v = `<{LOW}` )
+                      (   n = `LE`     v = `<={LOW}` )
+                      (   n = `GT`     v = `>{LOW}` )
+                      (   n = `GE`     v = `>={LOW}` )
+                      (   n = `CP`     v = `*{LOW}*` )
+                      (   n = `BT`     v = `{LOW}...{HIGH}` )
+                      (   n = `NE`     v = `!(={LOW})` )
+                      (   n = `NE`     v = `!(<leer>)` )
+                      (   n = `<leer>` v = `<leer>` ) ).
 
   ENDMETHOD.
-
 
   METHOD filter_get_token_t_by_range_t.
 
@@ -679,11 +711,8 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
     DATA(lt_tab) = VALUE ty_t_range( ).
 
-    itab_corresponding(
-      EXPORTING
-        val = val
-      CHANGING
-        tab = lt_tab
+    itab_corresponding( EXPORTING val = val
+                        CHANGING  tab = lt_tab
     ).
 
     LOOP AT lt_tab REFERENCE INTO DATA(lr_row).
@@ -692,11 +721,13 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
       REPLACE `{LOW}`  IN lv_value WITH lr_row->low.
       REPLACE `{HIGH}` IN lv_value WITH lr_row->high.
 
-      INSERT VALUE #( key = lv_value text = lv_value visible = abap_true editable = abap_true ) INTO TABLE result.
+      INSERT VALUE #( key      = lv_value
+                      text     = lv_value
+                      visible  = abap_true
+                      editable = abap_true ) INTO TABLE result.
     ENDLOOP.
 
   ENDMETHOD.
-
 
   METHOD itab_filter_by_val.
 
@@ -721,17 +752,17 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD itab_get_csv_by_itab.
 
     FIELD-SYMBOLS <tab> TYPE table.
+
     ASSIGN val TO <tab>.
     DATA(tab) = CAST cl_abap_tabledescr( cl_abap_typedescr=>describe_by_data( <tab> ) ).
 
     DATA(struc) = CAST cl_abap_structdescr( tab->get_table_line_type( ) ).
 
     LOOP AT struc->get_components( ) REFERENCE INTO DATA(lr_comp).
-      result = result && lr_comp->name && ';'.
+      result = |{ result }{ lr_comp->name };|.
     ENDLOOP.
 
     result = result && cl_abap_char_utilities=>cr_lf.
@@ -747,13 +778,12 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
           EXIT.
         ENDIF.
         lv_index = lv_index + 1.
-        result = result && <field> && ';'.
+        result = |{ result }{ <field> };|.
       ENDDO.
       result = result && cl_abap_char_utilities=>cr_lf.
     ENDLOOP.
 
   ENDMETHOD.
-
 
   METHOD itab_get_itab_by_csv.
 
@@ -764,20 +794,19 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     SPLIT val AT cl_abap_char_utilities=>newline INTO TABLE DATA(lt_rows).
     SPLIT lt_rows[ 1 ] AT ';' INTO TABLE DATA(lt_cols).
 
-
     LOOP AT lt_cols REFERENCE INTO DATA(lr_col).
 
       DATA(lv_name) = c_trim_upper( lr_col->* ).
       REPLACE ` ` IN lv_name WITH `_`.
 
-      INSERT VALUE #( name = lv_name type = cl_abap_elemdescr=>get_c( 40 ) ) INTO TABLE lt_comp.
+      INSERT VALUE #( name = lv_name
+                      type = cl_abap_elemdescr=>get_c( 40 ) ) INTO TABLE lt_comp.
     ENDLOOP.
 
     DATA(struc) = cl_abap_structdescr=>get( lt_comp ).
-    DATA(o_table_desc) = cl_abap_tabledescr=>create(
-          p_line_type  = CAST #( struc )
-          p_table_kind = cl_abap_tabledescr=>tablekind_std
-          p_unique     = abap_false ).
+    DATA(o_table_desc) = cl_abap_tabledescr=>create( p_line_type  = CAST #( struc )
+                                                     p_table_kind = cl_abap_tabledescr=>tablekind_std
+                                                     p_unique     = abap_false ).
 
     CREATE DATA result TYPE HANDLE o_table_desc.
     ASSIGN result->* TO <tab>.
@@ -800,42 +829,34 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD json_parse.
     TRY.
 
-        zjbui5_cl_ajson=>parse( val )->to_abap(
-          EXPORTING
-            iv_corresponding = abap_true
-          IMPORTING
-            ev_container = data ).
+        zjbui5_cl_ajson=>parse( val )->to_abap( EXPORTING iv_corresponding = abap_true
+                                               IMPORTING ev_container     = data ).
 
       CATCH cx_root INTO DATA(x).
         ASSERT x IS NOT BOUND.
     ENDTRY.
   ENDMETHOD.
-
 
   METHOD json_stringify.
     TRY.
 
         DATA(li_ajson) = CAST zjbui5_if_ajson( zjbui5_cl_ajson=>create_empty( ) ).
-        result = li_ajson->set( iv_path = `/` iv_val = any )->stringify( ).
+        result = li_ajson->set( iv_path = `/`
+                                iv_val  = any )->stringify( ).
 
       CATCH cx_root INTO DATA(x).
         ASSERT x IS NOT BOUND.
     ENDTRY.
   ENDMETHOD.
 
-
   METHOD rtti_check_class_exists.
 
     TRY.
-        cl_abap_classdescr=>describe_by_name(
-          EXPORTING
-            p_name        = val
-          EXCEPTIONS
-           type_not_found = 1 ).
+        cl_abap_classdescr=>describe_by_name( EXPORTING  p_name         = val
+                                              EXCEPTIONS type_not_found = 1 ).
         IF sy-subrc = 0.
           result = abap_true.
         ENDIF.
@@ -845,7 +866,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     ENDTRY.
 
   ENDMETHOD.
-
 
   METHOD rtti_check_ref_data.
 
@@ -858,7 +878,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD rtti_check_type_kind_dref.
 
     DATA(lv_type_kind) = cl_abap_datadescr=>get_data_type_kind( val ).
@@ -866,24 +885,23 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD rtti_get_classname_by_ref.
 
     DATA(lv_classname) = cl_abap_classdescr=>get_class_name( in ).
-    result = substring_after( val = lv_classname sub = `\CLASS=` ).
+    result = substring_after( val = lv_classname
+                              sub = `\CLASS=` ).
 
   ENDMETHOD.
-
 
   METHOD rtti_get_intfname_by_ref.
 
-    DATA(rtti) = cl_abap_typedescr=>describe_by_data(  in  ).
+    DATA(rtti) = cl_abap_typedescr=>describe_by_data( in  ).
     DATA(ref) = CAST cl_abap_refdescr( rtti ).
     DATA(name) = ref->get_referenced_type( )->absolute_name.
-    result = substring_after( val = name sub = `\INTERFACE=` ).
+    result = substring_after( val = name
+                              sub = `\INTERFACE=` ).
 
   ENDMETHOD.
-
 
   METHOD rtti_get_type_kind.
 
@@ -891,18 +909,16 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD rtti_get_type_name.
     TRY.
 
         DATA(lo_descr) = cl_abap_elemdescr=>describe_by_data( val ).
         DATA(lo_ele) = CAST cl_abap_elemdescr( lo_descr ).
-        result  = lo_ele->get_relative_name( ).
+        result = lo_ele->get_relative_name( ).
 
       CATCH cx_root.
     ENDTRY.
   ENDMETHOD.
-
 
   METHOD rtti_get_t_attri_by_include.
 
@@ -931,14 +947,12 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD rtti_get_t_attri_by_oref.
 
     DATA(lo_obj_ref) = cl_abap_objectdescr=>describe_by_object_ref( val ).
     result = CAST cl_abap_classdescr( lo_obj_ref )->attributes.
 
   ENDMETHOD.
-
 
   METHOD rtti_get_t_attri_by_any.
 
@@ -963,7 +977,7 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     result = lo_struct->get_components( ).
 
     LOOP AT result REFERENCE INTO DATA(lr_comp)
-        WHERE as_include = abap_true.
+         WHERE as_include = abap_true.
 
       DATA(lt_attri) = rtti_get_t_attri_by_include( lr_comp->type ).
 
@@ -972,7 +986,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     ENDLOOP.
 
   ENDMETHOD.
-
 
   METHOD rtti_get_t_ddic_fixed_values.
 
@@ -992,15 +1005,13 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
         DATA(elemdescr) = CAST cl_abap_elemdescr( typedescr ).
 
-        result = rtti_get_t_fixvalues(
-            elemdescr = elemdescr
-            langu     = langu ).
+        result = rtti_get_t_fixvalues( elemdescr = elemdescr
+                                       langu     = langu ).
 
       CATCH cx_root.
     ENDTRY.
 
   ENDMETHOD.
-
 
   METHOD rtti_tab_get_relative_name.
 
@@ -1028,31 +1039,27 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD source_get_file_types.
 
-    DATA(lv_types) = `abap, abc, actionscript, ada, apache_conf, applescript, asciidoc, assembly_x86, autohotkey, batchfile, bro, c9search, c_cpp, cirru, clojure, cobol, coffee, coldfusion, csharp, css, curly, d, dart, diff, django, dockerfile, ` &&
-`dot, drools, eiffel, yaml, ejs, elixir, elm, erlang, forth, fortran, ftl, gcode, gherkin, gitignore, glsl, gobstones, golang, groovy, haml, handlebars, haskell, haskell_cabal, haxe, hjson, html, html_elixir, html_ruby, ini, io, jack, jade, java, ja` &&
-      `vascri` &&
-`pt, json, jsoniq, jsp, jsx, julia, kotlin, latex, lean, less, liquid, lisp, live_script, livescript, logiql, lsl, lua, luapage, lucene, makefile, markdown, mask, matlab, mavens_mate_log, maze, mel, mips_assembler, mipsassembler, mushcode, mysql, ni` &&
-`x, nsis, objectivec, ocaml, pascal, perl, pgsql, php, plain_text, powershell, praat, prolog, properties, protobuf, python, r, razor, rdoc, rhtml, rst, ruby, rust, sass, scad, scala, scheme, scss, sh, sjs, smarty, snippets, soy_template, space, sql,` &&
-      ` sqlserver, stylus, svg, swift, swig, tcl, tex, text, textile, toml, tsx, twig, typescript, vala, vbscript, velocity, verilog, vhdl, wollok, xml, xquery, terraform, slim, redshift, red, puppet, php_laravel_blade, mixal, jssm, fsharp, edifact,` &&
-      ` csp, cssound_score, cssound_orchestra, cssound_document`.
+    DATA(lv_types) = |abap, abc, actionscript, ada, apache_conf, applescript, asciidoc, assembly_x86, autohotkey, batchfile, bro, c9search, c_cpp, cirru, clojure, cobol, coffee, coldfusion, csharp, css, curly, d, dart, diff, django, dockerfile, | &&
+|dot, drools, eiffel, yaml, ejs, elixir, elm, erlang, forth, fortran, ftl, gcode, gherkin, gitignore, glsl, gobstones, golang, groovy, haml, handlebars, haskell, haskell_cabal, haxe, hjson, html, html_elixir, html_ruby, ini, io, jack, jade, java, ja| &&
+      |vascri| &&
+|pt, json, jsoniq, jsp, jsx, julia, kotlin, latex, lean, less, liquid, lisp, live_script, livescript, logiql, lsl, lua, luapage, lucene, makefile, markdown, mask, matlab, mavens_mate_log, maze, mel, mips_assembler, mipsassembler, mushcode, mysql, ni| &&
+|x, nsis, objectivec, ocaml, pascal, perl, pgsql, php, plain_text, powershell, praat, prolog, properties, protobuf, python, r, razor, rdoc, rhtml, rst, ruby, rust, sass, scad, scala, scheme, scss, sh, sjs, smarty, snippets, soy_template, space, sql,| &&
+      | sqlserver, stylus, svg, swift, swig, tcl, tex, text, textile, toml, tsx, twig, typescript, vala, vbscript, velocity, verilog, vhdl, wollok, xml, xquery, terraform, slim, redshift, red, puppet, php_laravel_blade, mixal, jssm, fsharp, edifact,| &&
+      | csp, cssound_score, cssound_orchestra, cssound_document|.
     SPLIT lv_types AT ',' INTO TABLE result.
 
   ENDMETHOD.
 
-
   METHOD source_get_method2.
 
-    DATA(lt_source) = source_get_method(
-         iv_classname  = iv_classname
-         iv_methodname = iv_methodname ).
+    DATA(lt_source) = source_get_method( iv_classname  = iv_classname
+                                         iv_methodname = iv_methodname ).
 
     result = source_method_to_file( lt_source ).
 
   ENDMETHOD.
-
 
   METHOD source_method_to_file.
 
@@ -1065,11 +1072,10 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD filter_get_sql_by_sql_string.
 
     DATA(lv_sql) = CONV string( val ).
-    REPLACE ALL OCCURRENCES OF ` ` IN lv_sql  WITH ``.
+    REPLACE ALL OCCURRENCES OF ` ` IN lv_sql WITH ``.
     lv_sql = to_upper( lv_sql ).
     SPLIT lv_sql AT 'SELECTFROM' INTO DATA(lv_dummy) DATA(lv_tab).
     SPLIT lv_tab AT `FIELDS` INTO lv_tab lv_dummy.
@@ -1078,21 +1084,19 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD time_get_date_by_stampl.
+    " TODO: variable is assigned but never used (ABAP cleaner)
     CONVERT TIME STAMP val TIME ZONE sy-zonlo INTO DATE result TIME DATA(lv_dummy).
   ENDMETHOD.
-
 
   METHOD time_get_timestampl.
     GET TIME STAMP FIELD result.
   ENDMETHOD.
 
-
   METHOD time_get_time_by_stampl.
+    " TODO: variable is assigned but never used (ABAP cleaner)
     CONVERT TIME STAMP val TIME ZONE sy-zonlo INTO DATE DATA(lv_dummy) TIME result.
   ENDMETHOD.
-
 
   METHOD time_substract_seconds.
 
@@ -1100,35 +1104,33 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
                                           secs  = seconds ).
   ENDMETHOD.
 
-
   METHOD unassign_data.
 
     FIELD-SYMBOLS <unassign> TYPE any.
+
     ASSIGN val->* TO <unassign>.
     result = <unassign>.
 
   ENDMETHOD.
-
 
   METHOD unassign_object.
 
     FIELD-SYMBOLS <unassign> TYPE any.
+
     ASSIGN val->* TO <unassign>.
     result = <unassign>.
 
   ENDMETHOD.
 
-
   METHOD url_param_create_url.
 
     LOOP AT t_params INTO DATA(ls_param).
-      result = result && ls_param-n && `=` && ls_param-v && `&`.
+      result = |{ result }{ ls_param-n }={ ls_param-v }&|.
     ENDLOOP.
     result = shift_right( val = result
                           sub = `&` ).
 
   ENDMETHOD.
-
 
   METHOD url_param_get.
 
@@ -1137,7 +1139,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     result = VALUE #( lt_params[ n = lv_val ]-v OPTIONAL ).
 
   ENDMETHOD.
-
 
   METHOD url_param_get_tab.
 
@@ -1169,11 +1170,11 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
     LOOP AT lt_param REFERENCE INTO DATA(lr_param).
       SPLIT lr_param->* AT `=` INTO DATA(lv_name) DATA(lv_value).
-      INSERT VALUE #( n = c_trim_lower( lv_name ) v = c_trim_lower( lv_value ) ) INTO TABLE rt_params.
+      INSERT VALUE #( n = c_trim_lower( lv_name )
+                      v = c_trim_lower( lv_value ) ) INTO TABLE rt_params.
     ENDLOOP.
 
   ENDMETHOD.
-
 
   METHOD url_param_set.
 
@@ -1181,31 +1182,29 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     DATA(lv_n) = c_trim_lower( name ).
 
     LOOP AT lt_params REFERENCE INTO DATA(lr_params)
-        WHERE n = lv_n.
+         WHERE n = lv_n.
       lr_params->v = c_trim_lower( value ).
     ENDLOOP.
     IF sy-subrc <> 0.
-      INSERT VALUE #( n = lv_n v = c_trim_lower( value ) ) INTO TABLE lt_params.
+      INSERT VALUE #( n = lv_n
+                      v = c_trim_lower( value ) ) INTO TABLE lt_params.
     ENDIF.
 
     result = url_param_create_url( lt_params ).
 
   ENDMETHOD.
 
-
   METHOD context_get_user_tech.
     result = sy-uname.
   ENDMETHOD.
 
-
   METHOD xml_parse.
 
     CALL TRANSFORMATION id
-        SOURCE XML xml
-        RESULT data = any.
+         SOURCE XML xml
+         RESULT data = any.
 
   ENDMETHOD.
-
 
   METHOD xml_srtti_parse.
 
@@ -1228,7 +1227,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD xml_srtti_stringify.
 
     check_raise_srtti_installed( ).
@@ -1245,7 +1243,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD xml_stringify.
 
     CALL TRANSFORMATION id
@@ -1255,15 +1252,15 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD x_check_raise.
 
     IF when = abap_true.
-      RAISE EXCEPTION TYPE zjbui5_cx_util_error EXPORTING val = v.
+      RAISE EXCEPTION TYPE zjbui5_cx_util_error
+        EXPORTING
+          val = v.
     ENDIF.
 
   ENDMETHOD.
-
 
   METHOD x_get_last_t100.
 
@@ -1282,22 +1279,19 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD x_raise.
 
-    RAISE EXCEPTION TYPE zjbui5_cx_util_error EXPORTING val = v.
+    RAISE EXCEPTION TYPE zjbui5_cx_util_error
+      EXPORTING
+        val = v.
 
   ENDMETHOD.
-
 
   METHOD check_raise_srtti_installed.
 
     IF rtti_check_class_exists( 'ZCL_SRTTI_TYPEDESCR' ) = abap_false.
 
-      DATA(lv_link) = `https://github.com/sandraros/S-RTTI`.
-      DATA(lv_text) = `<p>Please install the open-source project S-RTTI by sandraros and try again: <a href="` &&
-                       lv_link && `" style="color:blue; font-weight:600;" target="_blank">(link)</a></p>`.
-
+      DATA(lv_text) = `UNSUPPORTED_FEATURE - Please install the open-source project S-RTTI by sandraros and try again: https://github.com/sandraros/S-RTTI`.
       RAISE EXCEPTION TYPE zjbui5_cx_util_error
         EXPORTING
           val = lv_text.
@@ -1305,7 +1299,6 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
-
 
   METHOD rtti_get_t_attri_by_table_name.
 
@@ -1316,39 +1309,31 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
     ENDIF.
 
     TRY.
-        cl_abap_structdescr=>describe_by_name(
-          EXPORTING
-            p_name         = table_name
-          RECEIVING
-            p_descr_ref    =   DATA(lo_obj)
-          EXCEPTIONS
-            type_not_found = 1
-            OTHERS         = 2
+        cl_abap_structdescr=>describe_by_name( EXPORTING  p_name         = table_name
+                                               RECEIVING  p_descr_ref    = DATA(lo_obj)
+                                               EXCEPTIONS type_not_found = 1
+                                                          OTHERS         = 2
             ).
 
         IF sy-subrc <> 0.
           RAISE EXCEPTION TYPE zjbui5_cx_util_error
             EXPORTING
-              val = 'TABLE_NOT_FOUD_NAME___' && table_name.
+              val = |TABLE_NOT_FOUD_NAME___{ table_name }|.
         ENDIF.
         DATA(lo_struct) = CAST cl_abap_structdescr( lo_obj ).
 
       CATCH cx_root.
 
         TRY.
-            cl_abap_structdescr=>describe_by_name(
-              EXPORTING
-                p_name         = table_name
-             RECEIVING
-                p_descr_ref    = lo_obj
-              EXCEPTIONS
-                type_not_found = 1
-                OTHERS         = 2
+            cl_abap_structdescr=>describe_by_name( EXPORTING  p_name         = table_name
+                                                   RECEIVING  p_descr_ref    = lo_obj
+                                                   EXCEPTIONS type_not_found = 1
+                                                              OTHERS         = 2
             ).
             IF sy-subrc <> 0.
               RAISE EXCEPTION TYPE zjbui5_cx_util_error
                 EXPORTING
-                  val = 'TABLE_NOT_FOUD_NAME___' && table_name.
+                  val = |TABLE_NOT_FOUD_NAME___{ table_name }|.
             ENDIF.
 
             DATA(lo_tab) = CAST cl_abap_tabledescr( lo_obj ).
@@ -1372,10 +1357,9 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD itab_corresponding.
 
-    FIELD-SYMBOLS <row_in> TYPE any.
+    FIELD-SYMBOLS <row_in>  TYPE any.
     FIELD-SYMBOLS <row_out> TYPE any.
 
     LOOP AT val ASSIGNING <row_in>.
@@ -1387,12 +1371,11 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
       ENDIF.
 
       INSERT INITIAL LINE INTO tab ASSIGNING <row_out> INDEX lv_lines.
-      <row_out> = CORRESPONDING #(  <row_in> ).
+      <row_out> = CORRESPONDING #( <row_in> ).
 
     ENDLOOP.
 
   ENDMETHOD.
-
 
   METHOD itab_filter_by_t_range.
 
@@ -1400,22 +1383,48 @@ CLASS zjbui5_cl_util IMPLEMENTATION.
 
   METHOD filter_get_data_by_multi.
 
-
-
   ENDMETHOD.
 
   METHOD filter_get_sql_where.
 
     LOOP AT val INTO DATA(ls_filter).
 
+      " TODO: variable is assigned but never used (ABAP cleaner)
       DATA lo_range TYPE REF TO lcl_range_to_sql.
 
-      CREATE OBJECT lo_range
-        EXPORTING
-          iv_fieldname = ls_filter-name
-          ir_range     = REF #( ls_filter-t_range ).
+      lo_range = NEW #( iv_fieldname = ls_filter-name
+                        ir_range     = REF #( ls_filter-t_range ) ).
 
     ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD msg_get.
+
+    result = lcl_msp_mapper=>msg_get( val ).
+
+  ENDMETHOD.
+
+  METHOD rtti_check_clike.
+
+    DATA(lv_type) = rtti_get_type_kind( val ).
+    CASE lv_type.
+      WHEN cl_abap_datadescr=>typekind_char OR
+          cl_abap_datadescr=>typekind_clike OR
+          cl_abap_datadescr=>typekind_csequence OR
+          cl_abap_datadescr=>typekind_string.
+        result = abap_true.
+    ENDCASE.
+
+  ENDMETHOD.
+
+  METHOD ui5_get_msg_type.
+
+    result = SWITCH #( val
+                       WHEN 'E' THEN `Error`
+                       WHEN 'S' THEN `Success`
+                       WHEN `W` THEN `Warning`
+                       ELSE `Information` ).
 
   ENDMETHOD.
 
