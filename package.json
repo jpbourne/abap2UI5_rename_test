@@ -12,7 +12,7 @@
       "@abaplint/cli": "^2.113.100"
     },
     "scripts" : {
-      "build": "npm run clone && npm run rename && npm run abaplint && npm run branch",
+      "build": "npm run clone && npm run rename && npm run abaplint",
       "clone": "node ./build/build.js --config ./setup/build.jsonc && rm -rf input",
       "rename": "npx abaplint ./setup/rename.jsonc --rename",
       "abaplint":  "cp ./setup/abaplint.jsonc dist && cd dist && npx abaplint && cd ..",

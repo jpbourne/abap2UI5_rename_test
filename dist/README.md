@@ -1,6 +1,7 @@
 # abap2UI5-build
 
-This is my new abap2UI5 project.
+This is my new abap2UI5 build.
+
 
 ### Configuration (build.jsonc)
 
@@ -17,4 +18,4 @@ This is my new abap2UI5 project.
 
 ### Timestamp
 
-Created at: 25. Februar 2025 um 14:55:02
+Created at: February 25, 2025 at 07:31:13 PM
