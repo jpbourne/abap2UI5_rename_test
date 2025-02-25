@@ -26,7 +26,7 @@ Run the clone process:
 ```
 npm run clone
 ```
-2. (optional) Set up the renaming process [here](https://github.com/abap2UI5/builder/blob/main/build/rename.jsonc) and run it with:
+2. (optional) Set up a renaming process [here](https://github.com/abap2UI5/builder/blob/main/build/rename.jsonc) and run it with:
 
 ```
 npm run rename
