@@ -11,7 +11,7 @@ Features:
 Find default builds for various use cases [here.](https://github.com/abap2UI5/build)
 
 ### Build Process
-1. Fork this repository and adjust the configuration for your build process [here:](https://github.com/abap2UI5/builder/blob/main/build/build.jsonc)
+1. Adjust the configuration for your build process [here:](https://github.com/abap2UI5/builder/blob/main/build/build.jsonc)
 ```json
 {
   "abap_version": "Cloud",
@@ -26,12 +26,12 @@ Run the clone process:
 ```
 npm run clone
 ```
-2. (optional) Adjust the configuration for your rename process [here](https://github.com/abap2UI5/builder/blob/main/build/rename.jsonc) and run it with:
+2. (optional) Set up the renaming process [here](https://github.com/abap2UI5/builder/blob/main/build/rename.jsonc) and run it with:
 
 ```
 npm run rename
 ```
-3. (optional) Add abaplint static code check [here:](https://github.com/abap2UI5/builder/blob/main/build/abaplint.jsonc)
+3. (optional) Add static code checks with abaplint [here:](https://github.com/abap2UI5/builder/blob/main/build/abaplint.jsonc)
 ```
 npm run abaplint
 ```
