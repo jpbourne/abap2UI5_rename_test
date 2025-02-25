@@ -38,6 +38,10 @@ npm run abaplint
 4. Find your newly generated abapGit project in the `dist` folder. Create a new build branch with:
 ```
 npm run branch
+git checkout -b build
+git add .
+git commit -m "my new build"
+git push origin build
 ```
 5. Pull this branch to your ABAP system, and you're ready to go.
 
