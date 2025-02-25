@@ -50,7 +50,6 @@ You can automate this process via github action by using the command:
 ```sh
 npm run build
 ```
-Check out an example [here.](https://github.com/abap2UI5/builder/blob/main/.github/workflows/build.yaml)
 
 ### Supported Projects
 The following projects are supported:
