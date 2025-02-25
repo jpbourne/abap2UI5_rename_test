@@ -16,7 +16,7 @@
       "clone": "node ./build/build.js --config ./setup/build.jsonc && rm -rf input",
       "rename": "npx abaplint ./setup/rename.jsonc --rename",
       "abaplint":  "cp ./setup/abaplint.jsonc dist && cd dist && npx abaplint && cd ..",
-      "branch": "find . -mindepth 1 -not -name 'dist' -not -path './dist/*' -delete && cp -r dist/* . && rm -r dist",
+      "branch": "find . -mindepth 1 -not -name 'dist' -not -path './dist/*' -not -name '.git' -not -path './.git/*' -delete && cp -r dist/* . && rm -r dist",
       "branch_create" : "node ./build/branch.js && git clean -fd && git checkout main" ,
       "branch_cleanup" : "chmod +x /workspaces/builder/build/branch3.sh && /workspaces/builder/build/branch3.sh"  
     }
