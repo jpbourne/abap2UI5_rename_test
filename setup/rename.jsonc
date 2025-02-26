@@ -1,7 +1,7 @@
 {
     "global": {
       "files": "/../dist/src/**/*.*",
-      "noIssues": [ "/src/05" ]
+      "noIssues": [ "/src/05", "/src/06" ]
     },
     "dependencies": [
         {
@@ -15,7 +15,7 @@
         {
           "type": "CLAS|INTF|TABL",
           "oldName": "z2ui5_(.*)",
-          "newName": "zabap2ui5_$1"
+          "newName": "zzzz2ui5_$1"
         }
       ]
     },
