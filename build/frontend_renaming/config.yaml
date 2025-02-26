@@ -1,6 +1,6 @@
 # config.yaml
 old_name: z2ui5
-new_name: zzzz2ui5
+new_name: z2ui7
 source_paths:
   - ../../dist/src/05/01
   - ../../dist/src/05/02
