@@ -68,8 +68,8 @@ Your project is not listed here? Feel free to send a PR and extend the list [her
 * v750: S/4 Private Cloud, S/4 On-Premise, R/3 NetWeaver 750
 * v702: R/3 NetWeaver <750
 
-### Concept
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/bad5ed8e-2fa3-4ce4-a0d1-fcd1608b4984" />
+### Idea
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/052782fd-6e71-485f-9b22-cb3c3e0a05f1" />
 
 
 ###### Namespace
