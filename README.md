@@ -75,8 +75,8 @@ Your project is not listed here? Feel free to send a PR and extend the list [her
 ###### Namespace
 All artifacts are generated under the namespace `zabap2ui5`. This differs from the main repository to allow both versions to coexist on the same system. One version for modifications and contributions (z2ui5), this one for productive usage (zabap2ui5). Just change the `build.json` for the use of your custom namespace.
 
-###### Limitations & Todo
-* Renaming for Frontend with customer namespace eg. `/ZZZ/` [here](https://github.com/abap2UI5/abap2UI5/issues/1493)
+### Limitations & Todo
+* Renaming for Frontend with customer namespace eg. `/ZZZ/` [[1493]](https://github.com/abap2UI5/abap2UI5/issues/1493)
 
 ### Credits
 * Automagic standalone renaming of ABAP objects [(SCN - 20.02.2021)](https://community.sap.com/t5/application-development-blog-posts/automagic-standalone-renaming-of-abap-objects/ba-p/13499851)
