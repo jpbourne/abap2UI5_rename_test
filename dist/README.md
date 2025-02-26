@@ -7,10 +7,10 @@ This is my new abap2UI5 build.
 
 ```json
 {
-  "abap_version": "Cloud",
+  "abap_version": "v750",
   "repositories": [
     "abap2UI5",
-    "layout-variant-management"
+    "frontend"
   ]
 }
 
@@ -18,4 +18,4 @@ This is my new abap2UI5 build.
 
 ### Timestamp
 
-Created at: February 25, 2025 at 07:31:13 PM
+Created at: February 26, 2025 at 03:04:22 PM

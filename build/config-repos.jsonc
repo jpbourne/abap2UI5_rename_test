@@ -47,6 +47,18 @@
         },
         "sourceDir": "src",
         "targetDir": "04"
+      },
+      {
+        "name": "frontend",
+        "url": "https://github.com/abap2UI5/frontend",
+        "renaming" : true,
+        "branches": {
+          "Cloud": "cloud",
+          "v750": "standard",
+          "v702": ""
+        },
+        "sourceDir": "src",
+        "targetDir": "05"
       }
     ]
   }

@@ -1,6 +1,7 @@
 {
     "global": {
         "files": "/src/**/*.*",
+        "noIssues": [ "/src/05" ]
     },
     "dependencies": [
       {
@@ -10,7 +11,7 @@
       }
     ],
     "syntax": {
-      "version": "Cloud",
+      "version": "v750",
       "errorNamespace": "."
     },
     "rules": {
