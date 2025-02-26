@@ -41,7 +41,7 @@ npm run branch
 git checkout -b build
 git add .
 git commit -m "my new build"
-git push origin build
+git push origin build --force
 ```
 5. Pull this branch to your ABAP system, and you're ready to go.
 
