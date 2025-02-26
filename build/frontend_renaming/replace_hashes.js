@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const srcDirs = ['../../dist/src/05/01', '../../dist/src/05/02'];
+const srcDirs = ['../../dist/src/06/01', '../../dist/src/06/02'];
 
 // Function to generate a random hash
 function generateRandomHash() {

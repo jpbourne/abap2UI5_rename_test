@@ -5,6 +5,6 @@ source_paths:
   - ../../dist/src/05/01
   - ../../dist/src/05/02
   - ../../dist/src/05/03
-destination_path: ../../dist/src
+destination_path: ../../dist/src/06
 exclude_patterns:
   - wapa

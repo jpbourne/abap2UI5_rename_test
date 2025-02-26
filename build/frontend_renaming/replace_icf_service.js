@@ -3,7 +3,7 @@ const path = require('path');
 const xml2js = require('xml2js');
 const yaml = require('js-yaml');
 
-const xmlDirPath = '/workspaces/abap2UI5-renamed/dist/src/05/01/';
+const xmlDirPath = '/workspaces/abap2UI5-renamed/dist/src/06/01/';
 const yamlFilePath = '/workspaces/abap2UI5-renamed/build/frontend_renaming/config.yaml';
 
 console.log('Starting the script...');
@@ -31,7 +31,7 @@ fs.readFile(yamlFilePath, 'utf8', (yamlErr, yamlData) => {
     console.log(`New name extracted from YAML file: ${newName}`);
 
     // Dynamically set the JSON file path
-    const jsonFilePath = `/workspaces/abap2UI5-renamed/dist/src/05/02/${newName}.wapa.manifest.json`;
+    const jsonFilePath = `/workspaces/abap2UI5-renamed/dist/src/06/02/${newName}.wapa.manifest.json`;
     console.log(`JSON file path set to: ${jsonFilePath}`);
 
     // Search for XML file in directory
