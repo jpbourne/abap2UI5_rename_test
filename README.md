@@ -83,4 +83,4 @@ All artifacts are generated under the namespace `zabap2ui5`. This differs from t
 * Static Code Checks via [abaplint](https://abaplint.org/) [(contributors)](https://github.com/abaplint/abaplint/graphs/contributors) 
 
 ### Issues
-For bug reports or feature requests, please open an issue.
+For bug reports or feature requests, please open an issue in the main repository [here.](https://github.com/abap2UI5/abap2UI5/issues)
