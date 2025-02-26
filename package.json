@@ -9,7 +9,9 @@
     "license": "MIT",
     "homepage": "https://github.com/abap2UI5/mirror-demo-abap2UI5#readme",
     "dependencies": {
-      "@abaplint/cli": "^2.113.100"
+      "@abaplint/cli": "^2.113.100",
+      "js-yaml": "^4.1.0",
+      "xml2js": "^0.6.2"
     },
     "scripts" : {
       "build": "npm run clone && npm run rename && npm run abaplint",
