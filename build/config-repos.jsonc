@@ -59,6 +59,18 @@
         },
         "sourceDir": "src",
         "targetDir": "05"
-      }
+      },
+      {
+        "name": "sql-console",
+        "url": "https://github.com/abap2UI5-addons/sql-console",
+        "renaming" : false,
+        "branches": {
+          "Cloud": "main",
+          "v750": "main",
+          "v702": ""
+        },
+        "sourceDir": "src",
+        "targetDir": "07"
+      },
     ]
   }
