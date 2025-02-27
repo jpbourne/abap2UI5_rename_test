@@ -60,6 +60,7 @@ The following projects are supported:
 | [samples](https://github.com/abap2UI5/samples)   |     | X        | X    | X         |
 | [layout-variant-management](https://github.com/abap2UI5-addons/layout-variant-management)   | X    | X        | X    |          |
 | [table-maintenance](https://github.com/abap2UI5-addons/table-maintenance)   | X    | X        | X    |          |
+| [sql-console](https://github.com/abap2UI5-addons/sql-console)   |     |         | X    |          |
 
 Your project is not listed here? Feel free to send a PR and extend the list [here.](./build/config-repos.jsonc)
 
