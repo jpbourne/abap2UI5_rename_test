@@ -68,7 +68,7 @@ Your project is not listed here? Feel free to send a PR and extend the list in `
 * v702: R/3 NetWeaver <750
 
 ### Concept
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/052782fd-6e71-485f-9b22-cb3c3e0a05f1" />
+<img width="700" alt="Screenshot 2025-02-27 at 13 55 03" src="https://github.com/user-attachments/assets/d6ee6f66-0b86-492e-a8ee-15b45bd32e63" />
 
 ###### Namespace
 All build artifacts are generated under the `zabap2ui5` namespace. This allows both development (`z2ui5`) and production (`zabap2ui5`) versions to coexist in the same system. To use a custom namespace, modify the `rename.jsonc` file.
