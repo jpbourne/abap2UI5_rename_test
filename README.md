@@ -44,7 +44,7 @@ git push origin build --force
 ```
 5. Pull this branch into your ABAP system via abapGit, and you’re ready to go! 🎉
 
-### Automate with GitHub Actions
+###### Automate with GitHub Actions
 You can automate the build process using GitHub Actions:
 ```sh
 npm run build
