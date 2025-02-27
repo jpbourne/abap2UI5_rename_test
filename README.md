@@ -71,7 +71,7 @@ Your project is not listed here? Feel free to send a PR and extend the list in `
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/052782fd-6e71-485f-9b22-cb3c3e0a05f1" />
 
 ###### Namespace
-All artifacts are generated under the zabap2ui5 namespace. This allows both development (`z2ui5`) and production (`zabap2ui5`) versions to coexist in the same system. To use a custom namespace, modify the `rename.jsonc` file.
+All build artifacts are generated under the `zabap2ui5` namespace. This allows both development (`z2ui5`) and production (`zabap2ui5`) versions to coexist in the same system. To use a custom namespace, modify the `rename.jsonc` file.
 
 ###### Transport to Production
 The development version (`z2ui5`) remains in a local package within the development system. The productive version (`zabap2ui5` or a customer namespace) can be transported like any other backend artifact to quality and production systems.
