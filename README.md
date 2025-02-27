@@ -62,7 +62,7 @@ npm run build
 
 Your project is not listed here? Feel free to send a PR and extend the list in `config-repos.jsonc` [here.](./build/config-repos.jsonc)
 
-###### Legend
+###### Compatibility
 * Cloud: S/4 Public Cloud, BTP ABAP Environment
 * v750: S/4 Private Cloud, S/4 On-Premise, R/3 NetWeaver 750
 * v702: R/3 NetWeaver <750
