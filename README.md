@@ -21,9 +21,9 @@ Find default builds for various use cases [here.](https://github.com/abap2UI5/bu
     "table-maintenance"
   ]
 }
-```sh
-Run the clone process:
 ```
+Run the clone process:
+```sh
 npm run clone
 ```
 2. (optional) Set up a renaming process [here](./setup/rename.jsonc) and run it with:
