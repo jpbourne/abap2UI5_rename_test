@@ -86,9 +86,10 @@ The development version can be updated frequently to develop new features and bu
 ### Limitations & To-Do
 * Frontend renaming with custom namespaces (e.g., /ZZZ/) is not yet supported [[1493]](https://github.com/abap2UI5/abap2UI5/issues/1493)
 
-### Credits
+### Credits & Blogs
 * Automagic standalone renaming of ABAP objects [(SCN - 20.02.2021)](https://community.sap.com/t5/application-development-blog-posts/automagic-standalone-renaming-of-abap-objects/ba-p/13499851)
-* Static Code Checks via [abaplint](https://abaplint.org/) [(contributors)](https://github.com/abaplint/abaplint/graphs/contributors) 
+* Static Code Checks via [abaplint](https://abaplint.org/) [(contributors)](https://github.com/abaplint/abaplint/graphs/contributors)
+* Renaming of ABAP Artifacts [(06.10.2024)](https://www.linkedin.com/pulse/renaming-abap-artifacts-power-abaplint-github-actions-development-kqede/)
 
 ### Issues & Feature Requests
 For bug reports or feature requests, please open an issue in the [main repository.](https://github.com/abap2UI5/abap2UI5/issues)
