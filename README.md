@@ -61,7 +61,7 @@ The following projects are supported:
 | [layout-variant-management](https://github.com/abap2UI5-addons/layout-variant-management)   | X    | X        | X    |          |
 | [table-maintenance](https://github.com/abap2UI5-addons/table-maintenance)   | X    | X        | X    |          |
 
-Your project is not listed here? Feel free to send a PR and extend the list [here.](https://github.com/abap2UI5/builder/blob/main/setup/config-repos.jsonc)
+Your project is not listed here? Feel free to send a PR and extend the list [here.](./build/config-repos.jsonc)
 
 ###### Legend
 * Cloud: S/4 Public Cloud, BTP ABAP Environment
