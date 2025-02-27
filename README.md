@@ -76,17 +76,15 @@ All artifacts are generated under the zabap2ui5 namespace. This allows both deve
 ###### Transport to Production
 The development version (`z2ui5`) remains in a local package within the development system. The productive version (`zabap2ui5` or a customer namespace) can be transported like any other backend artifact to quality and production systems.
 
-###### Update cycle
+###### Update Cycle
 The development version can be updated frequently to develop new features and bug fixes for abap2UI5. The productive version is updated only when necessary, reducing testing efforts, transport overhead, and other update-related tasks.
 
-The development version (z2ui5) can be updated frequently and be used to deevelop new features and bugfixes for abap2UI5. The productive version can be updated just if needed, to lower testing efforts, transports to production and other update efforts.
-
-### Limitations & Todo
+### Limitations & To-Do
 * Frontend renaming with custom namespaces (e.g., /ZZZ/) is not yet supported [[1493]](https://github.com/abap2UI5/abap2UI5/issues/1493)
 
 ### Credits
 * Automagic standalone renaming of ABAP objects [(SCN - 20.02.2021)](https://community.sap.com/t5/application-development-blog-posts/automagic-standalone-renaming-of-abap-objects/ba-p/13499851)
 * Static Code Checks via [abaplint](https://abaplint.org/) [(contributors)](https://github.com/abaplint/abaplint/graphs/contributors) 
 
-### Issues
+### Issues & Feature Requests
 For bug reports or feature requests, please open an issue in the [main repository.](https://github.com/abap2UI5/abap2UI5/issues)
