@@ -1,6 +1,6 @@
 # abap2UI5-builder
 
-Automatically create your own abap2UI5 build with the ABAP version and addons you need.
+Easily create your own abap2UI5 build with the ABAP version and addons you need.
 
 Features:
 * Integrates abap2UI5, frontend, and multiple addons into a single project
@@ -71,9 +71,15 @@ Your project is not listed here? Feel free to send a PR and extend the list in `
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/052782fd-6e71-485f-9b22-cb3c3e0a05f1" />
 
 ###### Namespace
-All artifacts are generated under the zabap2ui5 namespace:
-* This allows both development (z2ui5) and production (zabap2ui5) versions to coexist in the same system
-* To use a custom namespace, modify the `rename.jsonc` file.
+All artifacts are generated under the zabap2ui5 namespace. This allows both development (`z2ui5`) and production (`zabap2ui5`) versions to coexist in the same system. To use a custom namespace, modify the `rename.jsonc` file.
+
+###### Transport to Production
+The development version (`z2ui5`) remains in a local package within the development system. The productive version (`zabap2ui5` or a customer namespace) can be transported like any other backend artifact to quality and production systems.
+
+###### Update cycle
+The development version can be updated frequently to develop new features and bug fixes for abap2UI5. The productive version is updated only when necessary, reducing testing efforts, transport overhead, and other update-related tasks.
+
+The development version (z2ui5) can be updated frequently and be used to deevelop new features and bugfixes for abap2UI5. The productive version can be updated just if needed, to lower testing efforts, transports to production and other update efforts.
 
 ### Limitations & Todo
 * Frontend renaming with custom namespaces (e.g., /ZZZ/) is not yet supported [[1493]](https://github.com/abap2UI5/abap2UI5/issues/1493)
