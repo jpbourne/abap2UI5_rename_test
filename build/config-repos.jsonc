@@ -72,5 +72,29 @@
         "sourceDir": "src",
         "targetDir": "07"
       },
+      {
+        "name": "cloud-gui",
+        "url": "https://github.com/abap2UI5-addons/cloud-gui",
+        "renaming" : false,
+        "branches": {
+          "Cloud": "main",
+          "v750": "main",
+          "v702": ""
+        },
+        "sourceDir": "src",
+        "targetDir": "07"
+      },
+      {
+        "name": "table-content-loader",
+        "url": "https://github.com/abap2UI5-addons/table-content-loader",
+        "renaming" : false,
+        "branches": {
+          "Cloud": "main",
+          "v750": "main",
+          "v702": ""
+        },
+        "sourceDir": "src",
+        "targetDir": "07"
+      }
     ]
   }
