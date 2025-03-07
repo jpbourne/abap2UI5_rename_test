@@ -10,7 +10,11 @@ This is my new abap2UI5 build.
   "abap_version": "v750",
   "repositories": [
     "abap2UI5",
-    "frontend"
+    "frontend",
+    "layout-variant-management",
+    "cloud-gui",
+    "table-content-loader",
+    "sql-console"
   ]
 }
 
@@ -18,4 +22,4 @@ This is my new abap2UI5 build.
 
 ### Timestamp
 
-Created at: February 26, 2025 at 04:14:06 PM
+Created at: March 7, 2025 at 05:07:53 PM

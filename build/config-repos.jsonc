@@ -82,7 +82,7 @@
           "v702": ""
         },
         "sourceDir": "src",
-        "targetDir": "07"
+        "targetDir": "08"
       },
       {
         "name": "table-content-loader",
@@ -94,7 +94,7 @@
           "v702": ""
         },
         "sourceDir": "src",
-        "targetDir": "07"
+        "targetDir": "09"
       }
     ]
   }
