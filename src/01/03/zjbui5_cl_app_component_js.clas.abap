@@ -18,35 +18,47 @@ CLASS zjbui5_cl_app_component_js IMPLEMENTATION.
 
   METHOD get.
 
-    result = `sap.ui.define(["sap/ui/core/UIComponent", "z2ui5/model/models",` && |\n| &&
-             `      "z2ui5/cc/DebugTool","z2ui5/cc/Server", "sap/base/Log","sap/ui/VersionInfo"` && |\n| &&
-             `` && |\n| &&
-             `    ], function (UIComponent, models, DebugTool, Server, Log, VersionInfo) {` && |\n| &&
+    result = `sap.ui.define(["sap/ui/core/UIComponent", "z2ui5/model/models", "z2ui5/cc/Server", "sap/ui/VersionInfo", "z2ui5/cc/DebugTool"` && |\n| &&
+             `], function (UIComponent, Models, Server, VersionInfo, DebugTool) {` && |\n| &&
              `    return UIComponent.extend("z2ui5.Component", {` && |\n| &&
              `        metadata: {` && |\n| &&
-             `            manifest: "json"` && |\n| &&
+             `            manifest: "json",` && |\n| &&
+             `            interfaces: [` && |\n| &&
+             `                "sap.ui.core.IAsyncContentCreation"` && |\n| &&
+             `            ]` && |\n| &&
              `        },` && |\n| &&
-             `         init: async function () {` && |\n| &&
+             `        async init() {` && |\n| &&
+             `` && |\n| &&
+             `            if (typeof z2ui5 !== 'undefined') {` && |\n| &&
+             `                z2ui5.oConfig = {};` && |\n| &&
+             `            }` && |\n| &&
              `` && |\n| &&
              `            UIComponent.prototype.init.apply(this, arguments);` && |\n| &&
              `` && |\n| &&
-             `            this.getRouter().initialize();` && |\n| &&
-             `            z2ui5.oRouter = this.getRouter();` && |\n| &&
-             `            this.setModel(models.createDeviceModel(), "device");` && |\n| &&
-             `            this._oLogger = Log.getLogger("abap2UI5");` && |\n| &&
+             `            if (typeof z2ui5 == 'undefined') {` && |\n| &&
+             `                z2ui5 = {};` && |\n| &&
+             `            }` && |\n| &&
+             `            if (z2ui5?.checkLocal == false) {` && |\n| &&
+             `                z2ui5 = {};` && |\n| &&
+             `            }` && |\n| &&
              `` && |\n| &&
-             `            z2ui5.oConfig = {};` && |\n| &&
+             `            if (typeof z2ui5.oConfig == 'undefined') {` && |\n| &&
+             `                z2ui5.oConfig = {};` && |\n| &&
+             `            }` && |\n| &&
+             `            z2ui5.oDeviceModel = Models.createDeviceModel();` && |\n| &&
+             `            this.setModel(z2ui5.oDeviceModel, "device");` && |\n| &&
+             `` && |\n| &&
              `            z2ui5.oConfig.ComponentData = this.getComponentData();` && |\n| &&
              `` && |\n| &&
              `            try {` && |\n| &&
              `                z2ui5.oLaunchpadService = await this.getService("ShellUIService");` && |\n| &&
-             `             } catch (e) {}` && |\n| &&
+             `            } catch (e) { }` && |\n| &&
              `` && |\n| &&
              `            let oVersionInfo = await VersionInfo.load();` && |\n| &&
              `            z2ui5.oConfig.UI5VersionInfo = {` && |\n| &&
-             `                version : oVersionInfo.version,` && |\n| &&
-             `                buildTimestamp : oVersionInfo.buildTimestamp,` && |\n| &&
-             `                gav : oVersionInfo.gav,` && |\n| &&
+             `                version: oVersionInfo.version,` && |\n| &&
+             `                buildTimestamp: oVersionInfo.buildTimestamp,` && |\n| &&
+             `                gav: oVersionInfo.gav,` && |\n| &&
              `            }` && |\n| &&
              `` && |\n| &&
              `            if (/iPad|iPhone/.test(navigator.platform)) {` && |\n| &&
@@ -56,10 +68,28 @@ CLASS zjbui5_cl_app_component_js IMPLEMENTATION.
              `            }` && |\n| &&
              `` && |\n| &&
              `            document.addEventListener("keydown", function (zEvent) {` && |\n| &&
-             `                if (zEvent?.key === "F12") {` && |\n| &&
-             `                    new z2ui5.cc.DebugTool().show();` && |\n| &&
+             `                if (zEvent?.ctrlKey && zEvent?.key === "F12") {` && |\n| &&
+             `                    if (!z2ui5.debugTool) {` && |\n| &&
+             `                        z2ui5.debugTool = new DebugTool();` && |\n| &&
+             `                    }` && |\n| &&
+             `                    z2ui5.debugTool.toggle();` && |\n| &&
              `                }` && |\n| &&
              `            });` && |\n| &&
+             `` && |\n| &&
+             `            window.addEventListener("popstate", (event) => {` && |\n| &&
+             `                delete event?.state?.response?.PARAMS?.SET_PUSH_STATE;` && |\n| &&
+             `                delete event?.state?.response?.PARAMS?.SET_APP_STATE_ACTIVE;` && |\n| &&
+             `                if (event?.state?.view) {` && |\n| &&
+             `                    z2ui5.oController.ViewDestroy();` && |\n| &&
+             `                    z2ui5.oResponse = event.state.response;` && |\n| &&
+             `                    z2ui5.oController.displayView(event.state.view, event.state.model);` && |\n| &&
+             `                }` && |\n| &&
+             `            });` && |\n| &&
+             `` && |\n| &&
+             `            z2ui5.oRouter = this.getRouter();` && |\n| &&
+             `            z2ui5.oRouter.initialize();` && |\n| &&
+             `            z2ui5.oRouter.stop();` && |\n| &&
+             `` && |\n| &&
              `        },` && |\n| &&
              `` && |\n| &&
              `        __beforeunload: function () {` && |\n| &&
