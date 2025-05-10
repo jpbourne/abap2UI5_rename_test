@@ -32,7 +32,7 @@ CLASS zjbui5_cl_app_index_html IMPLEMENTATION.
              `    </style>` &&
              `    <script` &&
              `        id="sap-ui-bootstrap"` &&
-             `        src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"` &&
+             `        src="resources/sap-ui-core.js"` &&
              `        data-sap-ui-theme="sap_horizon"` &&
              `        data-sap-ui-resourceroots='{` &&
              `            "z2ui5": "./"` &&
@@ -53,6 +53,7 @@ CLASS zjbui5_cl_app_index_html IMPLEMENTATION.
              `    ></div>` &&
              `</body>` &&
              `</html>` &&
+             `` &&
               ``.
 
   ENDMETHOD.

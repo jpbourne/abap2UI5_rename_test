@@ -51,6 +51,11 @@ CLASS zjbui5_cl_app_server_js IMPLEMENTATION.
              `                    }` && |\n| &&
              `                };` && |\n| &&
              `` && |\n| &&
+             `              //  try{` && |\n| &&
+             `              //  let oState = JSON.parse(JSON.stringify({ view: z2ui5.oView.mProperties.viewContent, model: z2ui5.oView.getModel().getData(), response: z2ui5.oResponse }));` && |\n| &&
+             `              //  history.replaceState(oState, "", window.location.href );` && |\n| &&
+             `              //  }catch(e){}` && |\n| &&
+             `` && |\n| &&
              `                z2ui5.oBody ??= {};` && |\n| &&
              `                z2ui5.oBody.S_FRONT = {` && |\n| &&
              `                    ID: z2ui5?.oBody?.ID,` && |\n| &&
@@ -125,12 +130,14 @@ CLASS zjbui5_cl_app_server_js IMPLEMENTATION.
              `                    }` && |\n| &&
              `                    ; if (z2ui5.oResponse.PARAMS?.S_FOLLOW_UP_ACTION?.CUSTOM_JS) {` && |\n| &&
              `                        setTimeout(() => {` && |\n| &&
-             `                            let mParams = z2ui5.oResponse?.PARAMS.S_FOLLOW_UP_ACTION.CUSTOM_JS.split("'");` && |\n| &&
+             `                            for ( let i = 0; i < z2ui5.oResponse?.PARAMS.S_FOLLOW_UP_ACTION.CUSTOM_JS.length ; i++ ){` && |\n| &&
+             `                            let mParams = z2ui5.oResponse?.PARAMS.S_FOLLOW_UP_ACTION.CUSTOM_JS[i].split("'");` && |\n| &&
              `                            let mParamsEF = mParams.filter((val, index) => index % 2)` && |\n| &&
              `                            if (mParamsEF.length) {` && |\n| &&
              `                                z2ui5.oController.eF.apply(undefined, mParamsEF);` && |\n| &&
              `                            } else {` && |\n| &&
              `                                Function("return " + mParams[0])();` && |\n| &&
+             `                            }` && |\n| &&
              `                            }` && |\n| &&
              `                        }, 100);` && |\n| &&
              `                    };` && |\n| &&
