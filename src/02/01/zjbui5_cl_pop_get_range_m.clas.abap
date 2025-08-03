@@ -24,9 +24,9 @@ CLASS zjbui5_cl_pop_get_range_m DEFINITION
         VALUE(result) TYPE ty_s_result.
 
   PROTECTED SECTION.
-    DATA client                 TYPE REF TO zjbui5_if_client.
-    DATA check_initialized      TYPE abap_bool.
-    DATA mv_popup_name TYPE LINE OF string_table.
+    DATA client            TYPE REF TO zjbui5_if_client.
+    DATA mv_popup_name     TYPE LINE OF string_table.
+
     METHODS popup_display.
 
     METHODS init.
@@ -35,9 +35,7 @@ CLASS zjbui5_cl_pop_get_range_m DEFINITION
 ENDCLASS.
 
 
-
 CLASS zjbui5_cl_pop_get_range_m IMPLEMENTATION.
-
   METHOD factory.
 
     r_result = NEW #( ).
@@ -45,13 +43,11 @@ CLASS zjbui5_cl_pop_get_range_m IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD init.
 
     popup_display( ).
 
   ENDMETHOD.
-
 
   METHOD popup_display.
 
@@ -72,9 +68,10 @@ CLASS zjbui5_cl_pop_get_range_m IMPLEMENTATION.
     DATA(grid) = item->grid( class = `sapUiSmallMarginTop sapUiSmallMarginBottom sapUiSmallMarginBegin` ).
     grid->text( `{NAME}` ).
 
-    grid->multi_input( tokens = `{T_TOKEN}`
-        enabled               = abap_false
-             valuehelprequest = client->_event( val = `LIST_OPEN` t_arg = VALUE #( ( `${NAME}` ) ) )
+    grid->multi_input( tokens           = `{T_TOKEN}`
+                       enabled          = abap_false
+                       valuehelprequest = client->_event( val   = `LIST_OPEN`
+                                                          t_arg = VALUE #( ( `${NAME}` ) ) )
             )->tokens(
                  )->token( key      = `{KEY}`
                            text     = `{TEXT}`
@@ -83,11 +80,13 @@ CLASS zjbui5_cl_pop_get_range_m IMPLEMENTATION.
                            editable = `{EDITABLE}` ).
 
     grid->button( text  = `Select`
-                  press = client->_event( val = `LIST_OPEN` t_arg = VALUE #( ( `${NAME}` ) ) ) ).
+                  press = client->_event( val   = `LIST_OPEN`
+                                          t_arg = VALUE #( ( `${NAME}` ) ) ) ).
     grid->button( icon  = 'sap-icon://delete'
                   type  = `Transparent`
                   text  = `Clear`
-                  press = client->_event( val = `LIST_DELETE` t_arg = VALUE #( ( `${NAME}` ) ) ) ).
+                  press = client->_event( val   = `LIST_DELETE`
+                                          t_arg = VALUE #( ( `${NAME}` ) ) ) ).
 
     lo_popup->buttons(
         )->button( text  = `Clear All`
@@ -110,8 +109,7 @@ CLASS zjbui5_cl_pop_get_range_m IMPLEMENTATION.
   METHOD zjbui5_if_app~main.
     me->client = client.
 
-    IF check_initialized = abap_false.
-      check_initialized = abap_true.
+    IF client->check_on_init( ).
       init( ).
       RETURN.
     ENDIF.

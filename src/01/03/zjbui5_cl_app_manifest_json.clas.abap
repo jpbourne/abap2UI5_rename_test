@@ -26,8 +26,8 @@ CLASS zjbui5_cl_app_manifest_json IMPLEMENTATION.
              `    "applicationVersion": {` &&
              `      "version": "0.0.1"` &&
              `    },` &&
-             `    "title": "{{appTitle}}",` &&
-             `    "description": "{{appDescription}}",` &&
+             `    "title": "",` &&
+             `    "description": "",` &&
              `    "resources": "resources.json",` &&
              `    "sourceTemplate": {` &&
              `      "id": "@sap/generator-fiori:basic",` &&
@@ -35,7 +35,7 @@ CLASS zjbui5_cl_app_manifest_json IMPLEMENTATION.
              `      "toolsId": "3a966e20-9635-4c28-8861-d1b66f79f1de"` &&
              `    },` &&
              `    "dataSources": {` &&
-             `      "mainService": {` &&
+             `      "http": {` &&
              `        "uri": "/sap/bc/z2ui5",` &&
              `        "type": "OData",` &&
              `        "settings": {` &&
@@ -50,7 +50,7 @@ CLASS zjbui5_cl_app_manifest_json IMPLEMENTATION.
              `        "z2ui5-display": {` &&
              `          "semanticObject": "z2ui5",` &&
              `          "action": "display",` &&
-             `          "title": "{{flpTitle}}",` &&
+             `          "title": "",` &&
              `          "signature": {` &&
              `            "parameters": {},` &&
              `            "additionalParameters": "allowed"` &&
@@ -93,13 +93,6 @@ CLASS zjbui5_cl_app_manifest_json IMPLEMENTATION.
              `        "factoryName": "sap.ushell.ui5service.ShellUIService"` &&
              `      }` &&
              `    },` &&
-             `    "models": {` &&
-             `      "": {` &&
-             `        "dataSource": "mainService",` &&
-             `        "preload": true,` &&
-             `        "settings": {}` &&
-             `      }` &&
-             `    },` &&
              `    "resources": {` &&
              `      "css": [` &&
              `        {` &&
@@ -111,7 +104,6 @@ CLASS zjbui5_cl_app_manifest_json IMPLEMENTATION.
              `      "config": {` &&
              `        "routerClass": "sap.m.routing.Router",` &&
              `        "viewType": "XML",` &&
-             `        "async": true,` &&
              `        "viewPath": "z2ui5.view",` &&
              `        "controlAggregation": "pages",` &&
              `        "controlId": "app",` &&
@@ -153,7 +145,6 @@ CLASS zjbui5_cl_app_manifest_json IMPLEMENTATION.
              `    "rootView": {` &&
              `      "viewName": "z2ui5.view.App",` &&
              `      "type": "XML",` &&
-             `      "async": true,` &&
              `      "id": "App"` &&
              `    }` &&
              `  },` &&
@@ -162,6 +153,7 @@ CLASS zjbui5_cl_app_manifest_json IMPLEMENTATION.
              `    "service": "z2ui5"` &&
              `  }` &&
              `}` &&
+             `` &&
               ``.
 
   ENDMETHOD.

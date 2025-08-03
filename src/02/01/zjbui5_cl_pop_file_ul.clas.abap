@@ -1,7 +1,6 @@
 CLASS zjbui5_cl_pop_file_ul DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+  PUBLIC FINAL
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 
@@ -22,9 +21,10 @@ CLASS zjbui5_cl_pop_file_ul DEFINITION
         value           TYPE string,
         check_confirmed TYPE abap_bool,
       END OF ty_s_result.
-    DATA ms_result TYPE ty_s_result.
-    DATA mv_path TYPE string.
-    DATA mv_value TYPE string.
+
+    DATA ms_result             TYPE ty_s_result.
+    DATA mv_path               TYPE string.
+    DATA mv_value              TYPE string.
     DATA check_confirm_enabled TYPE abap_bool.
 
     METHODS result
@@ -32,34 +32,31 @@ CLASS zjbui5_cl_pop_file_ul DEFINITION
         VALUE(result) TYPE ty_s_result.
 
   PROTECTED SECTION.
-    DATA client TYPE REF TO zjbui5_if_client.
-    DATA title TYPE string.
-    DATA icon TYPE string.
-    DATA question_text TYPE string.
+    DATA client              TYPE REF TO zjbui5_if_client.
+    DATA title               TYPE string.
+    DATA icon                TYPE string.
+    DATA question_text       TYPE string.
     DATA button_text_confirm TYPE string.
-    DATA button_text_cancel TYPE string.
-    DATA check_initialized TYPE abap_bool.
+    DATA button_text_cancel  TYPE string.
+
     METHODS view_display.
+
   PRIVATE SECTION.
 ENDCLASS.
 
 
-
 CLASS zjbui5_cl_pop_file_ul IMPLEMENTATION.
-
-
   METHOD factory.
 
     r_result = NEW #( ).
-    r_result->title = i_title.
+    r_result->title               = i_title.
 
-    r_result->question_text = i_text.
+    r_result->question_text       = i_text.
     r_result->button_text_confirm = i_button_text_confirm.
-    r_result->button_text_cancel = i_button_text_cancel.
-    r_result->mv_path = i_path.
+    r_result->button_text_cancel  = i_button_text_cancel.
+    r_result->mv_path             = i_path.
 
   ENDMETHOD.
-
 
   METHOD result.
 
@@ -67,43 +64,36 @@ CLASS zjbui5_cl_pop_file_ul IMPLEMENTATION.
 
   ENDMETHOD.
 
-
   METHOD view_display.
 
-    DATA(popup) = zjbui5_cl_xml_view=>factory_popup( )->dialog(
-                  title       = title
-                  icon        = icon
-                   afterclose = client->_event( 'BUTTON_CANCEL' )
+    DATA(popup) = zjbui5_cl_xml_view=>factory_popup( )->dialog( title      = title
+                                                               icon       = icon
+                                                               afterclose = client->_event( 'BUTTON_CANCEL' )
               )->content(
                   )->vbox( 'sapUiMediumMargin'
                   )->label( question_text
-                  )->_z2ui5( )->file_uploader(
-                        value       = client->_bind_edit( mv_value )
-                        path        = client->_bind_edit( mv_path )
-                        placeholder = 'filepath here...'
-                        upload      = client->_event( 'UPLOAD' )
+                  )->_z2ui5( )->file_uploader( value       = client->_bind_edit( mv_value )
+                                               path        = client->_bind_edit( mv_path )
+                                               placeholder = 'filepath here...'
+                                               upload      = client->_event( 'UPLOAD' )
               )->get_parent( )->get_parent(
               )->buttons(
-                  )->button(
-                      text  = button_text_cancel
-                      press = client->_event( 'BUTTON_CANCEL' )
-                  )->button(
-                      text    = button_text_confirm
-                      press   = client->_event( 'BUTTON_CONFIRM' )
-                      enabled = client->_bind( check_confirm_enabled )
-                      type    = 'Emphasized' ).
+                  )->button( text  = button_text_cancel
+                             press = client->_event( 'BUTTON_CANCEL' )
+                  )->button( text    = button_text_confirm
+                             press   = client->_event( 'BUTTON_CONFIRM' )
+                             enabled = client->_bind( check_confirm_enabled )
+                             type    = 'Emphasized' ).
 
     client->popup_display( popup->stringify( ) ).
 
   ENDMETHOD.
 
-
   METHOD zjbui5_if_app~main.
 
     me->client = client.
 
-    IF check_initialized = abap_false.
-      check_initialized = abap_true.
+    IF client->check_on_init( ).
       view_display( ).
       RETURN.
     ENDIF.
